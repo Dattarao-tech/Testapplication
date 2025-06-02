@@ -1,0 +1,48 @@
+package com.Demoexample2.Demowork.StudentServiceImpl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.Demoexample2.Demowork.dto.SubjectRespo;
+import com.Demoexample2.Demowork.entity.Subject;
+import com.Demoexample2.Demowork.exception.ResourceNotFoundException;
+import com.Demoexample2.Demowork.service.SubjectService;
+@Service
+public class SubjectServiceImpl implements SubjectService{
+
+	@Autowired
+	private SubjectRespo subjectRespo;
+
+	@Override
+	public Subject getSubjectById(long id) {
+		// TODO Auto-generated method stub
+		Subject NewSubject=subjectRespo.findById(id).orElseThrow(()-> new ResourceNotFoundException("Subject","id",id));
+		return 	NewSubject;
+	}
+
+	@Override
+	public Subject saveSubject(Subject subject) {
+		// TODO Auto-generated method stub
+		Subject NewSubject=subjectRespo.save(subject);
+		return NewSubject;
+	}
+
+	@Override
+	public Subject updateSubject(Subject subject, long id) {
+		// TODO Auto-generated method stub
+		Subject NewSubject=subjectRespo.findById(id).orElse(null);
+		if(NewSubject!=null) {
+			NewSubject.setCourse(subject.getCourse());
+			NewSubject.setSubject_name(subject.getSubject_name());
+			NewSubject.setIsmadtory_forpassing(true);
+			NewSubject.setMax_marks(100);
+			NewSubject.setMin_pass_marks(35);
+			subjectRespo.save(NewSubject);
+				return NewSubject;
+		}
+		else {
+			throw new ResourceNotFoundException("Subject","id",id);
+		}
+
+	}
+}

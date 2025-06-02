@@ -1,0 +1,42 @@
+package com.springboot.web.security.Controller;
+
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.springboot.web.security.Entity.Comment;
+import com.springboot.web.security.Entity.Input;
+import com.springboot.web.security.Entity.NewInput;
+import com.springboot.web.security.ServiceImp.CommenetserviceImpl;
+
+@RestController
+@RequestMapping("/api/cooment")
+public class CommentController {
+	
+	@Autowired
+	private CommenetserviceImpl commenetserviceImpl;
+	
+	@GetMapping("/all")
+	public List<Comment> getAllcomment(){
+		List<Comment> allComments = commenetserviceImpl.getAllComments();
+		return allComments ;
+		
+	}
+	@PostMapping("/cre")
+	public void procosscomment(@RequestBody Input input) throws JsonProcessingException{
+		System.out.println(input.toString());
+//		ObjectMapper mapper = new ObjectMapper();
+//		String writeValueAsString = mapper.writeValueAsString(mapper);
+//	NewInput[] newInput = input.getNewInput();
+//	for(int i=0; i<newInput.length; i++) {
+//		System.out.println(newInput[i]);
+//	}}
+}}

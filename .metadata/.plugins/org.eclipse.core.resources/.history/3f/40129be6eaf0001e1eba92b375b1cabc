@@ -1,0 +1,265 @@
+package com.Demoexample2.Demowork;
+
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import com.Demoexample2.Demowork.dto.CourseRepository;
+import com.Demoexample2.Demowork.dto.Examattaimcaparerepo;
+import com.Demoexample2.Demowork.dto.PaperattamptcaptureRepo;
+import com.Demoexample2.Demowork.dto.QuestionOptionRepo;
+import com.Demoexample2.Demowork.dto.QuestionmasterRepo;
+import com.Demoexample2.Demowork.dto.QuestionpaperdRepo;
+import com.Demoexample2.Demowork.dto.StudentCourseMappingRepo;
+import com.Demoexample2.Demowork.dto.StudentRepository;
+import com.Demoexample2.Demowork.dto.SubjectRespo;
+import com.Demoexample2.Demowork.entity.Student;
+
+@SpringBootApplication
+public class DemoworkApplication implements CommandLineRunner{
+	public static void main(String[] args) {
+		SpringApplication.run(DemoworkApplication.class, args);
+
+//		Student newstudent = new Student();
+//		newstudent.setEmail_id("dattarao.deosarkar@quest-global.com");
+//		newstudent.setAge(28);
+//		newstudent.setGender("male");
+//		newstudent.setLoginpassword("ashish");
+//		newstudent.setMobile(9359550033l);
+//		newstudent.setName("Dattarao");
+//		Student newstudent1=studentRepository.save(newstudent);
+//		System.out.println(newstudent1);
+
+
+//
+//		Student newstudent2 = new Student();
+//		newstudent2.setEmail_id("ashish.deosarkar@quest-global.com");
+//		newstudent2.setAge(30);
+//		newstudent2.setGender("male");
+//		newstudent2.setLoginpassword("datta");
+//		newstudent2.setMobile(7744935955l);
+//		newstudent2.setName("Ashihs");
+//
+//		Student newstudent3=studentRepository.save(newstudent2);
+//		System.out.println(newstudent3);
+//
+
+//		Student newstudent3 = new Student();
+//		newstudent3.setEmail_id("payal.tidake@quest-global.com");
+//		newstudent3.setAge(40);
+//		newstudent3.setGender("female");
+//		newstudent3.setLoginpassword(4321);
+//		newstudent3.setMobile(9977449571l);
+//		newstudent3.setName("Payal");
+//		Student newstudent4=studentRepository.save(newstudent3);
+//		System.out.println(newstudent4);
+
+	}
+	@Autowired
+	private  CourseRepository  courseRepository;
+	@Autowired
+	private StudentCourseMappingRepo  studentCourseMappingRepo;
+
+	@Autowired
+	private  StudentRepository studentRepository;
+
+	@Autowired
+	private Examattaimcaparerepo examattaimcaparerepo;
+	@Autowired
+	private SubjectRespo subjectRespo;
+
+	@Autowired
+	private  QuestionmasterRepo  questionmasterRepo;
+
+	@Autowired
+	private QuestionOptionRepo questionOptionRepo;
+
+	@Autowired
+	 private  QuestionpaperdRepo  questionpaperdRepo;
+
+	@Autowired
+	private PaperattamptcaptureRepo paperattamptcaptureRepo;
+
+
+	@Override
+	@Transactional
+	public void run(String... args) throws Exception {
+		// TODO Auto-generated method stub
+
+		Student newstudent = new Student();
+		newstudent.setEmail_id("pandu.deosarkar@quest11-global.com");
+		newstudent.setAge(12);
+		newstudent.setGender("male");
+		newstudent.setLoginpassword("PANDU");
+		newstudent.setMobile(9900000004l);
+		newstudent.setName("PUNDU");
+		studentRepository.save(newstudent);
+
+		Student newstudent2 = new Student();
+		newstudent2.setEmail_id("suraj.shinde@quest-global.com");
+		newstudent2.setAge(29);
+		newstudent2.setGender("male");
+		newstudent2.setLoginpassword("suraj");
+		newstudent2.setMobile(7744935955l);
+		newstudent2.setName("suraj patil");
+		studentRepository.save(newstudent2);
+//////
+////
+//		Course course = new Course();
+//		course.setCourse_name("saleforse couse");
+//		course.setFee_amount(1000000l);
+//		course.setMax_exam_attempts(1);
+//		course.setEnabled(true);
+//		course.setEnabled_from_date(new Date());
+//		course.setEnabled_to_date(new Date());;
+//		course.setCompletion_duration_in_days(360);
+//		courseRepository.save(course);
+////
+//		Course course1 = new Course();
+//		course1.setCourse_name("data engg course");
+//		course1.setFee_amount(1000000l);
+//		course1.setMax_exam_attempts(2);
+//		course1.setEnabled(true);
+//		course1.setEnabled_from_date(new Date());
+//		course1.setEnabled_to_date(new Date());;
+//		course1.setCompletion_duration_in_days(100);
+//		courseRepository.save(course1);
+//
+//
+//////		List<Course> Liscourse= new ArrayList<Course>();
+////		 Liscourse.add(course);
+////		 Liscourse.add(course1);
+//
+//		StudentCourseMapping  studentCourseMapping= new  StudentCourseMapping();
+//		 studentCourseMapping.setMappingId("Ashihs");
+//		 studentCourseMapping.setStudent(newstudent);
+//		 studentCourseMapping.setCourse(course);
+//		 studentCourseMapping.setAttempt_utilized(1);
+//		 studentCourseMapping.setFee_payment_status("complted");
+//		 studentCourseMapping.setMarks_obtained(70);
+//		 studentCourseMapping.setMarks_out_of(100);
+//		 studentCourseMapping.setRegistration_date(new Date());
+//		 studentCourseMapping.setValid_upto_date(new Date());
+//		 studentCourseMapping.setResult("pass");
+//		 studentCourseMappingRepo.save(studentCourseMapping);
+//
+//		 StudentCourseMapping  studentCourseMapping1= new  StudentCourseMapping();
+//		 studentCourseMapping1.setMappingId("Datta");
+//		 studentCourseMapping1.setStudent(newstudent2 );
+//		 studentCourseMapping1.setCourse(course1);
+//		 studentCourseMapping1.setAttempt_utilized(2);
+//		 studentCourseMapping1.setFee_payment_status("incomplted");
+//		 studentCourseMapping1.setMarks_obtained(30);
+//		 studentCourseMapping1.setMarks_out_of(100);
+//		 studentCourseMapping1.setRegistration_date(new Date());
+//		 studentCourseMapping1.setValid_upto_date(new Date());
+//		 studentCourseMapping1.setResult("faile");
+//		 studentCourseMappingRepo.save( studentCourseMapping1);
+//
+//
+//		Scmexattemptcaptue sceacaptaire= new Scmexattemptcaptue();
+//		sceacaptaire.setCourse(course);
+//		sceacaptaire.setStudent(newstudent);
+//		sceacaptaire.setAttemt_number(2);
+//		sceacaptaire.setExam_str_time(LocalTime.parse("08:30:00"));
+//		sceacaptaire.setExam_end_time(LocalTime.parse("12:00:00"));
+//		sceacaptaire.setMar_Obtained(23);
+//		sceacaptaire.setExam_result("fail");
+//		examattaimcaparerepo.save(sceacaptaire);
+//
+////
+//		Scmexattemptcaptue sceacaptaire1= new Scmexattemptcaptue();
+//		sceacaptaire1.setCourse(course1);
+//		sceacaptaire1.setStudent(newstudent2);
+//		sceacaptaire1.setAttemt_number(1);
+//		sceacaptaire1.setExam_str_time(LocalTime.parse("08:30:00"));
+//		sceacaptaire1.setExam_end_time(LocalTime.parse("12:00:00"));
+//		sceacaptaire1.setMar_Obtained(85);
+//		sceacaptaire1.setExam_result("pass");
+//		examattaimcaparerepo.save(sceacaptaire1);
+//
+////////
+//		Subject subject = new Subject();
+//		 subject.setId(122l);
+//		subject.setCourse(course);
+//		 subject.setSubject_name("chemetry");
+//		 subject.setIsmadtory_forpassing(true);
+//		 subject.setMax_marks(100);
+//		 subject.setMin_pass_marks(35);
+//		 subjectRespo.save(subject);
+//
+//		 Subject subject1 = new Subject();
+//		 subject1.setId(120l);
+//		 subject1.setCourse(course1);
+//		 subject1.setSubject_name("Biology");
+//		 subject1.setIsmadtory_forpassing(true);
+//		 subject1.setMax_marks(90);
+//		 subject1.setMin_pass_marks(28);
+//		 subjectRespo.save(subject1);
+////
+//		Questionmaster singleoptionquestion = new Questionmaster();
+//		System.out.println("single option");
+//		singleoptionquestion.setQuestion_text("what is your favorite color?");
+//		singleoptionquestion.setResponsetyep(Questionmaster.ResponseType.Single_Option);
+//		singleoptionquestion.setOptions(Arrays.asList("red"));
+//		questionmasterRepo.save(singleoptionquestion);
+//		System.out.println("multiople option");
+//////
+//		Questionmaster multipleptionquestion =new Questionmaster();
+//
+//		multipleptionquestion.setQuestion_text("what is programing laugages do you know? ");
+//		multipleptionquestion.setResponsetyep(Questionmaster.ResponseType.Multiple_Option);
+//		multipleptionquestion.setOptions(Arrays.asList("java", "python", "c++","c"));
+//
+//		questionmasterRepo.save( multipleptionquestion);
+//
+//		QuestionOption questionOption = new QuestionOption();
+//		questionOption.setOption_text("this is single option");
+//		questionOption.setIscorrectOption(true);
+//		questionOption.setQuestionmaster(singleoptionquestion);
+//		questionOptionRepo.save(questionOption);
+//
+//		QuestionOption questionOption1 = new QuestionOption();
+//		questionOption1.setOption_text("this is multiple option question");
+//		questionOption1.setIscorrectOption(true);
+//		questionOption1.setQuestionmaster(multipleptionquestion);
+//		questionOptionRepo.save(questionOption1);
+//
+//		QuestionPaperd NewQuestionPaperd = new QuestionPaperd();
+//		 NewQuestionPaperd.setMarks_weightage(20);
+//		 NewQuestionPaperd.setQuestionmaster(singleoptionquestion);
+//		 NewQuestionPaperd.setSubject(subject);
+//
+//		 questionpaperdRepo.save( NewQuestionPaperd);
+////
+//		 QuestionPaperd NewQuestionPaperd1 = new QuestionPaperd();
+//		 NewQuestionPaperd1.setMarks_weightage(10);
+//		 NewQuestionPaperd1.setQuestionmaster(multipleptionquestion);
+//		 NewQuestionPaperd1.setSubject(subject1);
+//		 questionpaperdRepo.save( NewQuestionPaperd1);
+//
+//		Paperattemptcapture  paperattemptcapture = new  Paperattemptcapture();
+//		paperattemptcapture.setIscorrectanswer(true);
+//		paperattemptcapture.setMarks_obtained(77);
+//		paperattemptcapture.setOption("which type of option this is");
+//		paperattemptcapture.setQuestion("what type of question this is");
+//		paperattemptcapture.setQuestionPaperd(NewQuestionPaperd);
+//		paperattemptcapture.setScmexattemptcaptue(sceacaptaire);
+//////
+//		paperattamptcaptureRepo.save(paperattemptcapture);
+//
+//		Paperattemptcapture  paperattemptcapture1 = new  Paperattemptcapture();
+//		paperattemptcapture1.setIscorrectanswer(false);
+//		paperattemptcapture1.setMarks_obtained(12);
+//		paperattemptcapture1.setOption("which type of option this is1");
+//		paperattemptcapture1.setQuestion("what type of question this is1");
+//		paperattemptcapture1.setQuestionPaperd(NewQuestionPaperd1);
+//		paperattemptcapture1.setScmexattemptcaptue(sceacaptaire1);
+//
+//		paperattamptcaptureRepo.save(paperattemptcapture1);
+
+	}
+}

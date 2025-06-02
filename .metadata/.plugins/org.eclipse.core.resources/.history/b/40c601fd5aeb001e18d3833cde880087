@@ -1,0 +1,12 @@
+package com.springboot.web.security;
+
+
+@SpringBootApplication
+@EnableDiscoveryClient
+public class WebTestEureka1Application {
+
+	public static void main(String[] args) {
+		SpringApplication.run(WebTestEureka1Application.class, args);
+	}
+
+}

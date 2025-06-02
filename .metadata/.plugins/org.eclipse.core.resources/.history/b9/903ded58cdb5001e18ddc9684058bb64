@@ -1,0 +1,10 @@
+package com.Demoexample2.Demowork.service;
+
+import com.Demoexample2.Demowork.entity.Student;
+
+public interface StudentService {
+	
+	Student saveStudent(Student student);
+	Student updateStudent(Student student);
+	Student findById(Student student);
+}

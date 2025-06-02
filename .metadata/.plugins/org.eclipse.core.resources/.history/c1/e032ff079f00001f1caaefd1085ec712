@@ -1,0 +1,9 @@
+package com.springboot.web.security.model;
+
+public class AppConfig {
+	
+    @Bean
+    public TaskServiceimpl taskService() {
+        return new TaskServiceimpl();
+    }
+}

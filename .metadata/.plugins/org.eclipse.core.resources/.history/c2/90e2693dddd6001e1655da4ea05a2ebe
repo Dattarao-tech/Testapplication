@@ -1,0 +1,5 @@
+package com.springboot.web.security.Service;
+
+public class RatingService {
+
+}

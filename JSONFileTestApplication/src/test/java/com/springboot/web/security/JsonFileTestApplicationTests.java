@@ -1,0 +1,13 @@
+package com.springboot.web.security;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class JsonFileTestApplicationTests {
+
+	@Test
+	void contextLoads() {
+	}
+
+}

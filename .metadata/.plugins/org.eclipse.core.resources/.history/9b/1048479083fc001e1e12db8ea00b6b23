@@ -1,0 +1,13 @@
+package com.springboot.web.security.ServiceImpl;
+
+import com.springboot.web.security.Entity.Task;
+import com.springboot.web.security.service.TaskServiceimpl;
+
+public class TaskServiceimpl1 implements TaskServiceimpl{
+	
+	@Override
+	public Task createTask(Task task) {
+		// TODO Auto-generated method stub
+		return task;
+	}
+}
