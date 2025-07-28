@@ -1,0 +1,126 @@
+package com.springboot.web.security.Controller;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import com.springboot.web.security.Model.Transaction;
+import com.springboot.web.security.Model.TransactonDataRequest;
+import com.springboot.web.security.Service.TransactionService;
+@RestController
+@RequestMapping("/api/data")
+public class TransactionController {
+	private static final Logger log = LoggerFactory.getLogger(TransactionController.class);
+
+	@Autowired(required = true)
+    private final TransactionService transactionService;
+
+   public TransactionController(TransactionService transactionService) {
+		super();
+		this.transactionService = transactionService;
+	}
+	//    @Autowired(required = true)
+//	private final List<Transaction> transactions; 
+//    @Autowired
+//    private final List<TransactionStatus> transactionStatuses;
+  
+//   @PostMapping("/maxCustomer")
+//   public String getMaxCustomer(@RequestBody TransactionRequest request) {
+//       transactionService.setTransactionData(request.getTransactionData());
+//       transactionService.setTransactionStatusData(request.getTransactionStatusData());
+//       return transactionService.getMaxCustomer();
+//   }
+   
+//   @PostMapping("/max-customer")
+//   public String getMaxCustomer(@RequestBody TransactionRequest request) {
+//       transactionService.setTransactionData(request.getTransactionData());
+//       transactionService.setTransactionStatusData(request.getTransactionStatusData());
+//
+//       return transactionService.getMaxCustomer();
+//   @PostMapping("/max-customer")
+//   public String getMaxCustomer(@RequestBody Map<String, Object> requestBody) {
+//       ObjectMapper mapper = new ObjectMapper();
+//       mapper.registerModule(new JavaTimeModule());
+//       List<Transaction> transactionData = mapper.convertValue(requestBody.get("transactionData"),
+//               new TypeReference<List<Transaction>>() {
+//               });
+//       List<TransactionStatus> transactionStatusData = mapper.convertValue(requestBody.get("transactionStatusData"),
+//               new TypeReference<List<TransactionStatus>>() {
+//               });
+//       return transactionService.getMaxCustomer(transactionData, transactionStatusData);
+   
+//   @PostMapping("/process")
+//   public ResponseEntity<String> processTransactions(@RequestBody TransactionRequest request) {
+//       transactionService.setTransactionData(request.getTransactionData());
+//       transactionService.setTransactionStatusData(request.getTransactionStatusData());
+//       String result = transactionService.getMaxCustomer();
+//       return ResponseEntity.ok(result);
+//    }
+   @PostMapping("/api/data/process")
+   public String processTransactionData(@RequestBody TransactonDataRequest request) {
+       List<Transaction> transactionData = request.getTransactionData();
+       List<com.springboot.web.security.Model.TransactionStatus> transactionStatusData = request.getTransactionStatusData();
+
+       if (transactionData == null || transactionStatusData == null) {
+           return "Transaction data or status data is null.";
+       }
+       Map<String, Transaction> combinedDataMap = new HashMap<>();
+       for (Transaction tData : transactionData) {
+           combinedDataMap.put(tData.getTransactionId(), tData);
+       }
+       for (com.springboot.web.security.Model.TransactionStatus tStatus : transactionStatusData) {
+           String transactionId = tStatus.getTransactionName();
+           if (combinedDataMap.containsKey(transactionId)) {
+               combinedDataMap.get(transactionId).setTransactionStatus(tStatus.getTransactionName());
+           }
+       }
+       System.out.println("Combined Data Map: " + combinedDataMap);
+
+       List<Transaction> completedTransactions = getCompletedTransactions(combinedDataMap);
+
+       System.out.println("Completed Transactions: " + completedTransactions);
+
+       if (completedTransactions.isEmpty()) {
+           return "No successful transactions found.";
+       }
+       Map<String, Double> customerTotals = calculateCustomerTotals(completedTransactions);
+
+       System.out.println("Customer Totals: " + customerTotals);
+
+       String maxCustomer = findMaxCustomer(customerTotals);
+
+       return "Customer with the maximum total amount for successful transactions: " + maxCustomer;
+   }
+   private List<Transaction> getCompletedTransactions(Map<String, Transaction> combinedDataMap) {
+       return combinedDataMap.values().stream()
+               .filter(transaction -> "Completed".equals(transaction.getTransactionStatus()))
+               .collect(Collectors.toList());
+   }
+   private Map<String, Double> calculateCustomerTotals(List<Transaction> completedTransactions) {
+       Map<String, Double> customerTotals = new HashMap<>();
+       for (Transaction transaction : completedTransactions) {
+           String customerId = transaction.getCustomerId();
+           double transactionAmount = transaction.getTransactionAmount();
+           customerTotals.put(customerId, customerTotals.getOrDefault(customerId, 0.0) + transactionAmount);
+       }
+       return customerTotals;
+   }
+   private String findMaxCustomer(Map<String, Double> customerTotals) {
+       if (customerTotals.isEmpty()) {
+           return null;  // No successful transactions found
+       }
+       return customerTotals.entrySet().stream()
+               .max(Map.Entry.comparingByValue())
+               .map(entry -> "Customer ID: " + entry.getKey() + ", Total Amount: " + entry.getValue())
+               .orElse(null);
+       
+   }  
+}

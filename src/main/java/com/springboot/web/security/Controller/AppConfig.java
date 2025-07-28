@@ -1,0 +1,23 @@
+package com.springboot.web.security.Controller;
+
+import java.util.ArrayList;
+import java.util.List;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import com.springboot.web.security.Model.Transaction;
+import com.springboot.web.security.Model.TransactionStatus;
+
+@Configuration
+public class AppConfig {	
+	
+	@Bean
+	public List<Transaction> gettransaction(){
+		return new ArrayList<>();
+	}
+	@Bean
+	public List<TransactionStatus> gettransactionstatus(){
+		return new ArrayList<>();
+		
+	}
+}
