@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/css/themef.css" />
+    <style>
+        /* Optional styling for chatbox and form */
+        #chatbox {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 20px;
+            height: 200px;
+            overflow-y: auto;
+            background-color: #f9f9f9;
+        }
+
+        form {
+            margin-bottom: 30px;
+        }
+
+        input[type="text"] {
+            width: 70%;
+            padding: 8px;
+        }
+
+        button {
+            padding: 8px 16px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Forensic Portfolio Signals</h1>
+
+    <!-- Chat history -->
+    <div id="chatbox" th:utext="${chathistory}"></div>
+
+    <!-- Chat input form -->
+    <form method="post" action="/chat">
+        <input type="text" name="userMessage" placeholder="Ask something...required" required />
+        <button type="submit">Send</button>
+    </form>
+
+    <!-- Signal table -->
+    <table>
+        <thead>
+            <tr>
+                <th>Stock</th>
+                <th>Signal</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="single : ${singles}">
+                <td th:text="${single.stockName}"></td>
+                <td th:text="${single.singleType}"></td>
+                <td th:text="${single.description}"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
